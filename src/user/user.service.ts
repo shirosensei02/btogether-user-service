@@ -11,6 +11,11 @@ export class UserService {
     return this.users;
   }
 
+  findById(id: number): User | undefined {
+    // Specify the parameter type
+    return this.users.find((user) => user.id === id); // Use find to get the user by ID
+  }
+  
   create(createUserDto: CreateUserDto): User {
     const newUser: User = { id: this.userId++, name: createUserDto.name }; // Type-safe user creation
     this.users.push(newUser);

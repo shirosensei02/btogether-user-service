@@ -1,20 +1,21 @@
 import { Module } from '@nestjs/common';
-import { UserModule } from './user/user.module';
-import { MicroserviceOptions, Transport } from '@nestjs/microservices';
+import { UserModule } from './user/user.module'; // Adjust path if necessary
+import { Transport, ClientsModule } from '@nestjs/microservices';
 
 @Module({
-  imports: [UserModule],
-  providers: [
-    {
-      provide: 'USER_SERVICE',
-      useFactory: () => ({
-        transport: Transport.TCP,
+  imports: [
+    UserModule, // Import UserModule here
+    ClientsModule.register([
+      {
+        name: 'USER_SERVICE', // Service identifier
+        transport: Transport.TCP, // Set transport to TCP
         options: {
-          host: 'localhost',
-          port: 3001,
+          host: 'localhost', // Set to the desired localhost (could be different in real setup)
+          port: 3001, // Set to the desired port for User Service
         },
-      }),
-    },
+      },
+    ]),
   ],
+  providers: [],
 })
 export class AppModule {}
