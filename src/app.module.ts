@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { UserModule } from './user/user.module'; // Adjust path if necessary
+import { UserModule } from './Module/user.module'; // Adjust path if necessary
 import { Transport, ClientsModule } from '@nestjs/microservices';
 
 @Module({
